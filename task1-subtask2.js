@@ -8,6 +8,7 @@ const timeoutPromise = (interval, intervalName) => {
             resolve();
         }, interval);
     });
+    
 };
 
 let main = () => {
