@@ -15,5 +15,4 @@ let main = async () => {
     await timeoutPromise(5000, 'IN5');
     console.log('Completed at:', new Date().toString());
 };
-
 main();
