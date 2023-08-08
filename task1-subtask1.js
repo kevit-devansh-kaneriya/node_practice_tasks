@@ -1,4 +1,5 @@
 const timeoutPromise = (interval, intervalName) => {
+    
     return new Promise((resolve, reject) => {
         setTimeout(function () {
             console.log(`Executed ${intervalName} at: ${new Date().toString()} with interval of ${interval}`);
