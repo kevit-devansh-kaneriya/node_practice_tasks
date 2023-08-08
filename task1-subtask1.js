@@ -6,6 +6,7 @@ const timeoutPromise = (interval, intervalName) => {
         }, interval);
     });
 };
+
 let main = async () => {
     console.log('Starting at:', new Date().toString());
     await timeoutPromise(1000, 'IN1');
@@ -15,4 +16,5 @@ let main = async () => {
     await timeoutPromise(5000, 'IN5');
     console.log('Completed at:', new Date().toString());
 };
+
 main();
