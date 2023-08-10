@@ -48,11 +48,27 @@ axios.request(users)
                     response.data.forEach(element => {
                         user.posts[0].postid = element.id;
                         user.posts[0].title = element.title;
-                        postids.push(element.id);
-                        console.log(user)
-                    });
-                    postids.forEach(compostid => {
-                        fetchComments(compostid)
+
+                        let comments = {
+                            method: 'get',
+                            maxBodyLength: Infinity,
+                            url: `https://jsonplaceholder.typicode.com/comments?postId=${element.id}`,
+                            headers: {}
+                        };
+                        axios.request(comments)
+                            .then((response) => {
+                                response.data.forEach(element => {
+                                    user.posts[0].comments.push({
+                                        name: element.name,
+                                        body: element.body
+                                    });
+                                });
+                                console.log(JSON.stringify(user, null, 2))
+            
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
                     });
 
                 })
@@ -67,20 +83,20 @@ axios.request(users)
 
 
 
-async function fetchComments(commentpostid) {
-    try {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${commentpostid}`);
-        response.data.forEach(element => {
-            user.posts[0].comments.push({
-                name: element.name,
-                body: element.body
-            });
-            console.log(JSON.stringify(user, null, 2))
+// async function fetchComments(commentpostid) {
+//     try {
+//         const response = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${commentpostid}`);
+//         response.data.forEach(element => {
+//             user.posts[0].comments.push({
+//                 name: element.name,
+//                 body: element.body
+//             });
+//             console.log(JSON.stringify(user, null, 2))
 
-        })
-    } catch (error) {
-        console.error(`Error fetching posts for User ID ${userId}:`, error.message);
-    }
-}
+//         })
+//     } catch (error) {
+//         console.error(`Error fetching posts for User ID ${userId}:`, error.message);
+//     }
+// }
 
 
