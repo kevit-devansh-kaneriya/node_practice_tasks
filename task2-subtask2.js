@@ -46,7 +46,7 @@ axios.request(comments)
                                     user.email = element.email;
                                     user.username = element.username;
                                 });
-                                console.log(user)
+                                console.log(JSON.stringify(user, null, 2))
 
                             })
                             .catch((error) => {
